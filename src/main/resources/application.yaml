@@ -1,6 +1,5 @@
-# spring.application.name=hanzawakanji
 spring:
-  applicatiopn:
+  application:
     name: hanzawakanji
 
 server:
