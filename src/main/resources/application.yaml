@@ -1,0 +1,7 @@
+# spring.application.name=hanzawakanji
+spring:
+  applicatiopn:
+    name: hanzawakanji
+
+server:
+  port: 40324
