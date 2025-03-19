@@ -9,10 +9,14 @@ import java.nio.file.Files
 
 @Component
 class KanjiDataSource {
+    companion object {
+        private const val JSON_FILE_PATH = "data.json"
+    }
+
     val data: List<Kanji> = init()
 
     private fun init(): List<Kanji> {
-        val json = Files.readString(ClassPathResource("data.json").file.toPath(), Charsets.UTF_8)
+        val json = Files.readString(ClassPathResource(JSON_FILE_PATH).file.toPath(), Charsets.UTF_8)
 
         val jackson = jacksonObjectMapper()
         return jackson.readValue(json, object: TypeReference<List<Kanji>>(){})
