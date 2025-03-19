@@ -1,6 +1,6 @@
 package com.mindaaaa.hanzawakanji.persistence
 
-import com.mindaaaa.hanzawakanji.persistence.model.Kanji
+import com.mindaaaa.hanzawakanji.db.model.Kanji
 import com.mindaaaa.hanzawakanji.persistence.model.Mode
 
 interface KanjiRepository {

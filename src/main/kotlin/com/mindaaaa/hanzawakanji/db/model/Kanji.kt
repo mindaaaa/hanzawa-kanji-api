@@ -1,4 +1,4 @@
-package com.mindaaaa.hanzawakanji.persistence.model
+package com.mindaaaa.hanzawakanji.db.model
 
 data class Kanji(
     val id: Int,
