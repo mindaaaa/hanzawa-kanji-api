@@ -4,8 +4,10 @@ import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.mindaaaa.hanzawakanji.db.model.Kanji
 import org.springframework.core.io.ClassPathResource
+import org.springframework.stereotype.Component
 import java.nio.file.Files
 
+@Component
 class KanjiDataSource {
     val data: List<Kanji> = init()
 
