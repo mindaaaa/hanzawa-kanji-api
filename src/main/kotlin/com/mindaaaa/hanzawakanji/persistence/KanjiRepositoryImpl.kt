@@ -7,12 +7,18 @@ import com.mindaaaa.hanzawakanji.persistence.model.Mode
 class KanjiRepositoryImpl(
     private val dataSource: KanjiDataSource,
 ) : KanjiRepository {
-    override fun list(mode: Mode, limit: Int, cursor: String?): List<Kanji> {
-        TODO("Not yet implemented")
-        // 1. dataSource로부터 한자 목록을 가져온다
+    override fun list(mode: Mode, limit: Int, cursor: Int?): List<Kanji> {
+        val data = dataSource.getKanjiList();
 
-        // 2. mode에 따라 섞거나 섞지 않는다
+        // TODO: mode 기능 구현하기
+        // TODO: OutOfBoundException 대응하기
+        return if (cursor != null) {
+            val startIdx = data.indexOfFirst { it.id == cursor }
+            val endIdx = startIdx + limit
 
-        // 3. cursor와 limit에 따라 2.의 결과를 잘라 반환한다.
+            data.subList(startIdx, endIdx)
+        } else {
+            data.subList(0, 10)
+        }
     }
 }
