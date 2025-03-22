@@ -10,7 +10,6 @@ class KanjiRepositoryImpl(
     private val dataSource: KanjiDataSource,
 ) : KanjiRepository {
     override fun list(mode: Mode, limit: Int, cursor: Int?, quizId: String?): List<Kanji> {
-        // TODO: OutOfBoundException 대응하기
         val data = decideData(
             data = dataSource.getKanjiList(),
             mode = mode,
@@ -27,27 +26,26 @@ class KanjiRepositoryImpl(
 
         val seed = quizId ?: UUID.randomUUID().toString()
 
-        val random = Random(seed.hashCode())
-
-        return data.shuffled(random)
+        return data.shuffled(
+            random = Random(seed.hashCode()),
+        )
     }
 
     private fun sliceList(target: List<Kanji>, limit: Int, cursor: Int?): List<Kanji> {
-        return if (cursor != null) {
-            val startIdx = target.indexOfFirst { it.id == cursor }
-            if (startIdx == -1) {
-                return emptyList()
-            }
-
-            val endIdx = startIdx + limit
-
-            if (endIdx > target.size) {
-                return target.subList(startIdx, target.size)
-            }
-
-            target.subList(startIdx, endIdx)
-        } else {
-            target.subList(0, limit)
+        if (cursor == null) {
+            return target.subList(0, limit)
         }
+
+        val startIdx = target.indexOfFirst { it.id == cursor }
+        if (startIdx == -1) {
+            return emptyList()
+        }
+
+        val endIdx = startIdx + limit
+        if (endIdx > target.size) {
+            return target.subList(startIdx, target.size)
+        }
+
+        return target.subList(startIdx, endIdx)
     }
 }
