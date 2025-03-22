@@ -1,14 +1,18 @@
 package com.mindaaaa.hanzawakanji.db
 
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.Test
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.shouldBe
 
-class KanjiDataSourceTest {
+class KanjiDataSourceTest : StringSpec({
+    "getKanjiList() 메소드는 id를 기준으로 정렬된 Kanji 리스트를 반환한다." {
+        // given
+        val dataSource = KanjiDataSource()
 
-  @Test
-  fun `KanjiDataSource를 인스턴스화 후에는 프로퍼티를 통해 한자 목록을 접근할 수 있다`() {
-   val dataSource = KanjiDataSource()
+        // when
+        val kanjiList = dataSource.getKanjiList()
+        val idSortedList = kanjiList.sortedBy { kanji -> kanji.id }
 
-   assertTrue(dataSource.data.size == 3)
-  }
- }
+        // then
+        kanjiList shouldBe idSortedList
+    }
+})
