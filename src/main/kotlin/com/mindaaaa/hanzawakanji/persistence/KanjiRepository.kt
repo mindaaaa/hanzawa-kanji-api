@@ -4,5 +4,5 @@ import com.mindaaaa.hanzawakanji.db.model.Kanji
 import com.mindaaaa.hanzawakanji.persistence.model.Mode
 
 interface KanjiRepository {
-    fun list(mode: Mode, limit: Int, cursor: Int?): List<Kanji>
+    fun list(mode: Mode, limit: Int, cursor: Int?, quizId: String?): List<Kanji>
 }
