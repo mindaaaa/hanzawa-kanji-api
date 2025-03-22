@@ -37,4 +37,19 @@ class KanjiRepositoryImplTest : StringSpec({
         // then
         first shouldBe second
     }
+
+    "list() 메소드에서 cursor에 해당하는 Kanji가 없다면 빈 리스트를 반환한다." {
+        // given
+        val cursor = 99999
+        val limit = 10
+        val kanjiRepository: KanjiRepository = KanjiRepositoryImpl(
+            dataSource = KanjiDataSource(),
+        )
+
+        // when
+        val list = kanjiRepository.list(Mode.NORMAL, limit, cursor, null)
+
+        // then
+        list shouldBe emptyList()
+    }
 })
