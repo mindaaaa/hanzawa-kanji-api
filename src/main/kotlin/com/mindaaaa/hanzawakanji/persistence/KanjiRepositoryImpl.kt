@@ -33,8 +33,12 @@ class KanjiRepositoryImpl(
     }
 
     private fun sliceList(target: List<Kanji>, limit: Int, cursor: Int?): List<Kanji> {
+        // TODO: limit이 target 사이즈보다 크면 마지막까지만 자르기
         return if (cursor != null) {
             val startIdx = target.indexOfFirst { it.id == cursor }
+            if (startIdx == -1) {
+                return emptyList()
+            }
             val endIdx = startIdx + limit
 
             target.subList(startIdx, endIdx)
