@@ -48,4 +48,9 @@ class KanjiRepositoryImpl(
 
         return target.subList(startIdx, endIdx)
     }
+
+    override fun getTotalCount(): Int {
+        return dataSource.getKanjiList()
+            .size
+    }
 }

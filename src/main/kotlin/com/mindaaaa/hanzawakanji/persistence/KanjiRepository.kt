@@ -5,4 +5,5 @@ import com.mindaaaa.hanzawakanji.persistence.model.Mode
 
 interface KanjiRepository {
     fun list(mode: Mode, limit: Int, cursor: Int?, quizId: String?): List<Kanji>
+    fun getTotalCount(): Int
 }
