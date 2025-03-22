@@ -1,6 +1,7 @@
 package com.mindaaaa.hanzawakanji.persistence
 
 import com.mindaaaa.hanzawakanji.db.KanjiDataSource
+import com.mindaaaa.hanzawakanji.db.model.Kanji
 import com.mindaaaa.hanzawakanji.persistence.model.Mode
 import io.kotest.assertions.throwables.shouldNotThrow
 import io.kotest.core.spec.style.DescribeSpec
@@ -68,6 +69,37 @@ class KanjiRepositoryImplTest : DescribeSpec({
             shouldNotThrow<IndexOutOfBoundsException> {
                 kanjiRepository.list(Mode.NORMAL, limit, cursor, null)
             }
+        }
+
+        it("cursor와 limit으로 모든 Kanji 목록을 순회할 수 있다.") {
+            // given
+            val dataSource = KanjiDataSource()
+            val kanjiList = dataSource.getKanjiList()
+
+            val kanjiRepository: KanjiRepository = KanjiRepositoryImpl(
+                dataSource = KanjiDataSource(),
+            )
+
+            val limit = 42
+            val expected = mutableListOf<Kanji>()
+
+            var currentCursor = 1
+            var loopCount = 0
+
+            // when
+            while (expected.size < kanjiList.size) {
+                val list = kanjiRepository.list(Mode.NORMAL, limit + 1, currentCursor, null)
+
+                val (id) = list.last()
+                currentCursor = id
+                expected.addAll(list.take(limit))
+
+                loopCount++
+            }
+
+            // then
+            expected shouldBe kanjiList
+            loopCount shouldBe (kanjiList.size / limit) + 1
         }
     }
 })
