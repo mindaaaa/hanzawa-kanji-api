@@ -9,6 +9,7 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.ints.shouldBeLessThanOrEqual
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
+import java.util.*
 
 class KanjiServiceTest : StringSpec({
     "list() 메소드는 다음 목록이 있는 경우 null이 아닌 cursor를 반환한다." {
@@ -55,5 +56,27 @@ class KanjiServiceTest : StringSpec({
         // then
         response.cursor shouldBe null
         response.items.size shouldBeLessThanOrEqual request.limit!!
+    }
+
+    "list() 메소드는 RANDOM 모드에 대해서도 잘 뒤섞인 목록을 반환한다." {
+        // given
+        val dataSource = KanjiDataSource()
+        val repository: KanjiRepository = KanjiRepositoryImpl(
+            dataSource = dataSource
+        )
+        val service = KanjiService(repository)
+
+        val request = ListRequestDto(
+            mode = Mode.RANDOM,
+            limit = 10,
+            cursor = null,
+            quizId = UUID.randomUUID().toString(),
+        )
+
+        // when
+        val response = service.list(dto = request)
+
+        // then
+        response.items[0].id shouldNotBe 1
     }
 })
