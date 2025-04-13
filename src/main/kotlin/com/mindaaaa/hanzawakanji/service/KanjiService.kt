@@ -21,14 +21,11 @@ class KanjiService(
 
         val refinedLimit = limit + 1
         val mode = dto.mode ?: DEFAULT_MODE
-        val cursor: Int? = if (dto.cursor != null) {
-            dto.cursor
+        
+        val cursor: Int? = if (dto.cursor == null && dto.mode == Mode.NORMAL) {
+            DEFAULT_CURSOR
         } else {
-            if (dto.mode == Mode.NORMAL) {
-                1
-            } else {
-                null
-            }
+            dto.cursor
         }
 
         val kanjiList = repository.list(

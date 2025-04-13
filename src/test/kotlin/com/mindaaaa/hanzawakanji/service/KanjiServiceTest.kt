@@ -9,7 +9,6 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.ints.shouldBeLessThanOrEqual
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
-import java.util.*
 
 class KanjiServiceTest : StringSpec({
     "list() 메소드는 다음 목록이 있는 경우 null이 아닌 cursor를 반환한다." {
@@ -70,7 +69,7 @@ class KanjiServiceTest : StringSpec({
             mode = Mode.RANDOM,
             limit = 10,
             cursor = null,
-            quizId = UUID.randomUUID().toString(),
+            quizId = "xxx", // 첫 번째 id는 1954인 퀴즈
         )
 
         // when
