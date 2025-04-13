@@ -20,11 +20,22 @@ class KanjiService(
         val limit = dto.limit ?: DEFAULT_LIMIT
 
         val refinedLimit = limit + 1
+        val mode = dto.mode ?: DEFAULT_MODE
+        val cursor: Int? = if (dto.cursor != null) {
+            dto.cursor
+        } else {
+            if (dto.mode == Mode.NORMAL) {
+                1
+            } else {
+                null
+            }
+        }
+
         val kanjiList = repository.list(
             limit = refinedLimit,
             quizId = dto.quizId,
-            mode = dto.mode ?: DEFAULT_MODE,
-            cursor = dto.cursor ?: DEFAULT_CURSOR,
+            mode = mode,
+            cursor = cursor,
         )
         val totalCount = repository.getTotalCount()
 
