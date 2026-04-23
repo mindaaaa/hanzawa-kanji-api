@@ -3,7 +3,7 @@
 ![Hanzawa-Kanji 배너 — 상용 한자, 배로 갚아준다](docs/hero.png)
 
 <h1>
-  <img src="https://readme-typing-svg.demolab.com?font=Gowun+Dodum&weight=700&size=32&color=E2513C&center=true&vCenter=true&width=720&height=60&duration=2800&pause=800&lines=한자와+칸지+API;상용한자+2%2C136자를;배로+갚아드리는+엔진." alt="Hanzawa-Kanji API" />
+  <img src="https://readme-typing-svg.demolab.com?font=Gowun+Dodum&weight=700&size=32&color=E2513C&center=true&vCenter=true&width=720&height=60&duration=2800&pause=800&lines=%ED%95%9C%EC%9E%90%EC%99%80+%EC%B9%B8%EC%A7%80+API;%EC%83%81%EC%9A%A9%ED%95%9C%EC%9E%90+2%2C136%EC%9E%90%EB%A5%BC;%EB%B0%B0%EB%A1%9C+%EA%B0%9A%EC%95%84%EB%93%9C%EB%A6%AC%EB%8A%94+%EC%97%94%EC%A7%84." alt="Hanzawa-Kanji API" />
 </h1>
 
 <p>
@@ -168,7 +168,12 @@
 
 > [!NOTE]
 > `presentation` / `service` / `persistence` / `db` 4개 패키지로 구성됩니다.  
-> **Controller(`presentation`)** → **Service(`service`)** → **Repository 인터페이스(`persistence`)** → **In-memory 구현체(`persistence`)** → **데이터 로더(`db`)** 순의 단방향 흐름입니다.  
+>   - **Controller(`presentation`)** →
+>   -  **Service(`service`)** →
+>   -  **Repository 인터페이스(`persistence`)** →
+>   -  **In-memory 구현체(`persistence`)** →
+>   -  **데이터 로더(`db`)** 순의 단방향 흐름입니다.
+> 
 > `db/KanjiDataSource`가 기동 시 `data.json`을 메모리에 로드합니다.
 
 ---
